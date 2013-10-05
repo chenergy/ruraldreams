@@ -23,10 +23,10 @@ public class CharacterSheepActions : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Joystick1Button17)){
+		if (Input.GetKeyDown(KeyCode.Alpha1)){
 			this.AddLittleSheep();
 		}
-		if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Joystick1Button17)){
+		if (Input.GetKeyDown(KeyCode.Alpha2)){
 			this.AddBigSheep();
 		}
 		if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Joystick1Button18)){
@@ -43,6 +43,7 @@ public class CharacterSheepActions : MonoBehaviour
 	public void AddLittleSheep (){
 		GameObject newSheep = GameObject.Instantiate(this.littleSheep, this.back.transform.position, this.littleSheep.transform.rotation) as GameObject;
 		newSheep.GetComponent<SheepMovement>().target = this.lastBack;
+		newSheep.GetComponent<SheepMovement>().state = SheepState.FOLLOWING;
 		this.lastBack = newSheep.GetComponent<SheepMovement>().back;
 		this.sheepList.Add(newSheep);
 	}
@@ -50,26 +51,32 @@ public class CharacterSheepActions : MonoBehaviour
 	public void AddBigSheep (){
 		GameObject newSheep = GameObject.Instantiate(this.bigSheep, this.back.transform.position, this.bigSheep.transform.rotation) as GameObject;
 		newSheep.GetComponent<SheepMovement>().target = this.lastBack;
+		newSheep.GetComponent<SheepMovement>().state = SheepState.FOLLOWING;
 		this.lastBack = newSheep.GetComponent<SheepMovement>().back;
 		this.sheepList.Add(newSheep);
+	}
+	
+	public void PickupSheep( GameObject sheep ){
+		SheepMovement script = sheep.GetComponent<SheepMovement>();
+		script.target = this.lastBack;
+		script.state = SheepState.FOLLOWING;
+		this.lastBack = script.back;
+		this.sheepList.Add(sheep);
 	}
 	
 	public void ThrowSheep (){
 		if (this.sheepList.Count > 0){
 			GameObject newSheep = new GameObject();
-			if (this.sheepList[0].name == "LittleSheep(Clone)"){
+			if (this.sheepList[0].name == "LittleSheep(Clone)" || this.sheepList[0].name == "LittleSheep"){
+				GameObject.Destroy(newSheep);
 				newSheep = GameObject.Instantiate(this.littleSheep, this.top.transform.position, this.littleSheep.transform.rotation) as GameObject;
 			}
-			else if (this.sheepList[0].name == "BigSheep(Clone)"){
+			else if (this.sheepList[0].name == "BigSheep(Clone)" || this.sheepList[0].name == "BigSheep"){
+				GameObject.Destroy(newSheep);
 				newSheep = GameObject.Instantiate(this.bigSheep, this.top.transform.position, this.bigSheep.transform.rotation) as GameObject;
 			}
-			newSheep.GetComponent<SheepMovement>().enabled = false;
-			newSheep.rigidbody.useGravity = true;
-			newSheep.rigidbody.freezeRotation = false;
-			newSheep.collider.enabled = true;
-			//newSheep.rigidbody.AddForce( new Vector3(0, 1, 0) * 5.0f );
+			newSheep.GetComponent<SheepMovement>().state = SheepState.THROWN;
 			newSheep.rigidbody.velocity = this.collider.transform.TransformDirection(new Vector3(0.0f, 5.0f, 5.0f));
-			
 			
 			GameObject.Destroy(this.sheepList[0]);
 			if (this.sheepList.Count > 1){

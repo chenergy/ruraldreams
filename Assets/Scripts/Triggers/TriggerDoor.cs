@@ -27,7 +27,7 @@ public class TriggerDoor : MonoBehaviour {
 	}
 	
 	void OnTriggerStay(Collider other){
-		if (Input.GetKeyDown(KeyCode.R)){
+		if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.Joystick1Button17)){
 			if (other.tag == "Player"){
 				if (!this.open){
 					this.leftTargetRotation = Quaternion.Euler( 0.0f, 90.0f, 0.0f );

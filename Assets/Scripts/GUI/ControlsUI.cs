@@ -4,15 +4,6 @@ using System.Collections;
 public class ControlsUI : MonoBehaviour {
 	public GUIStyle leftJustified;
 	public GUIStyle rightJustified;
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 	
 	void OnGUI(){
 		GUI.Box(new Rect(20,0,200,100), 
