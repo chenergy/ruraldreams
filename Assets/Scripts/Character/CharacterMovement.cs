@@ -69,7 +69,7 @@ public class CharacterMovement : MonoBehaviour
 			this.jumping = false;
 		}
 		
-		Debug.Log("Grounded? " + this.IsGrounded.ToString() );
+		//Debug.Log("Grounded? " + this.IsGrounded.ToString() );
 	}
 	
 	private bool IsGrounded{

@@ -6,9 +6,10 @@ public enum SheepState { IDLE, FOLLOWING, THROWN };
 //[RequireComponent(typeof(Rigidbody))]
 public class SheepMovement : MonoBehaviour
 {
-	public float 		followSpeed = 7.0f;
+	public float 		followSpeed = 13.0f;
+	public float		followDistance = 2.0f;
+	public float		throwStartHeight = 1.0f;
 	public GameObject 	target;
-	public GameObject 	back;
 	public GameObject	radius;
 	
 	[HideInInspector]
@@ -41,14 +42,16 @@ public class SheepMovement : MonoBehaviour
 			this.rigidbody.useGravity 		= false;
 			this.rigidbody.freezeRotation 	= true;
 			this.collider.enabled 			= false;
-			this.radius.collider.enabled	= false;
+			this.radius.collider.enabled 	= false;
 			if (this.target != null){
-				if ((this.target.transform.position - this.collider.transform.position).magnitude > 0.1f){
-					this.collider.transform.position = Vector3.Lerp( this.collider.transform.position, new Vector3(this.target.transform.position.x, 0.5f, this.target.transform.position.z), Time.deltaTime * this.followSpeed );
-					this.collider.transform.LookAt( new Vector3(this.target.transform.position.x, 0.5f, this.target.transform.position.z) );
+				if ((this.target.transform.position - this.collider.transform.position).magnitude > this.followDistance+0.1f){
+					this.collider.transform.position = Vector3.Lerp( this.collider.transform.position, this.target.transform.TransformDirection(new Vector3(0.0f, 0.5f, -1 * this.followDistance)) + new Vector3(this.target.transform.position.x, 0.0f, this.target.transform.position.z), Time.deltaTime * this.followSpeed );
+					this.collider.transform.LookAt( this.target.transform.TransformDirection(new Vector3(0.0f, 0.5f, -1 * this.followDistance)) + new Vector3(this.target.transform.position.x, 0.0f, this.target.transform.position.z) );
 				}
 			}
-			this.collider.transform.position = new Vector3(this.collider.transform.position.x, 0.5f, this.collider.transform.position.z);
+			else{
+				this.state = SheepState.IDLE;
+			}
 			break;
 		case SheepState.THROWN:
 			this.rigidbody.useGravity 		= true;
@@ -66,12 +69,16 @@ public class SheepMovement : MonoBehaviour
 		if (this.throwTimer >= 3.0f){
 			this.throwTimer = 0.0f;
 			this.state = SheepState.IDLE;
-		}
+		}		
 	}
-	
-	public void SetTarget ( GameObject target ){
+	public void Follow(GameObject target){
 		this.target = target;
-		this.collider.transform.position = this.target.transform.position;
+		this.state = SheepState.FOLLOWING;
+	}
+	public void Throw(Vector3 point){
+		this.transform.position = this.target.transform.position + new Vector3(0, this.throwStartHeight, 0);
+		this.rigidbody.velocity = point;
+		this.state = SheepState.THROWN;
 	}
 }
 
