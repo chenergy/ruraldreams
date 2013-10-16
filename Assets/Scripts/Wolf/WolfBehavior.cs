@@ -2,11 +2,26 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class WolfBehavior : MonoBehaviour {
+public class WolfBehavior : MonoBehaviour
+{
 	//WolfState used for determining movement.
 	//TargetType used for picking priority.
-	public enum WolfState{ Idle, Chasing, Eating, Leashing}	
-	public enum TargetType{ LoosePig, LooseSheep, Pig, Sheep, Inedible}
+	public enum WolfState
+	{
+		Idle,
+		Chasing,
+		Eating,
+		Leashing
+	}
+
+	public enum TargetType
+	{
+		LoosePig,
+		LooseSheep,
+		Pig,
+		Sheep,
+		Inedible
+	}
 	
 	//Store the Components of the Wolf Object
 	public GameObject wolf;
@@ -22,64 +37,64 @@ public class WolfBehavior : MonoBehaviour {
 	
 	//Internal attributes of the wolf.
 	private WolfState state = WolfState.Idle;
-	private List<GameObject> loosePigs;
-	private List<GameObject> looseSheep;
-	private List<GameObject> pigs;
-	private List<GameObject> sheep;
-	private List<GameObject>[] possibleTargets;
+	private List<GameObject> loosePigs = new List<GameObject> ();
+	private List<GameObject> looseSheep = new List<GameObject> ();
+	private List<GameObject> pigs = new List<GameObject> ();
+	private List<GameObject> sheep = new List<GameObject> ();
+	private List<GameObject>[] possibleTargets = new List<GameObject>[4];
 	private float eatingTimer = 0.0f;
-       private int targetCount = 0;
+	private int targetCount = 0;
 		
 
 	// Use this for initialization
-	void Start () {
-		this.loosePigs = new List<GameObject>();
-		this.looseSheep = new List<GameObject>();
-		this.pigs = new List<GameObject>();
-		this.sheep = new List<GameObject>();
-		this.possibleTargets = new List<GameObject>[4]{ loosePigs, looseSheep, pigs, sheep };
-		this.agroTrigger.GetComponent<SphereCollider>().radius = agroRange;
-		this.leashTrigger.GetComponent<SphereCollider>().radius = leashRange;
+	void Start ()
+	{
+		this.agroTrigger.GetComponent<SphereCollider> ().radius = agroRange;
+		this.leashTrigger.GetComponent<SphereCollider> ().radius = leashRange;
+		possibleTargets [0] = loosePigs;
+		possibleTargets [1] = looseSheep;
+		possibleTargets [2] = pigs;
+		possibleTargets [3] = sheep;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 		//Picks a target off the front of the target list and chases it.
-		if( this.targetCount > 0 && this.state != WolfState.Eating){
-			this.target = FindTarget();
+		if (this.targetCount > 0 && this.state != WolfState.Eating) {
+			this.target = FindTarget ();
 			this.state = WolfState.Chasing;
 		}
-		if( this.targetCount <= 0){
+		if (this.targetCount <= 0) {
 			this.target = null;
 			this.state = WolfState.Leashing;
 		}
-		switch(state){
+		switch (state) {
 		case WolfState.Idle:
 			this.wolf.rigidbody.transform.position = this.transform.position;
-			this.wolf.rigidbody.transform.LookAt( Camera.main.transform.position );
+			this.wolf.rigidbody.transform.LookAt (Camera.main.transform.position);
 			break;
 		case WolfState.Chasing:
-			this.wolf.rigidbody.transform.position = Vector3.Lerp( this.wolf.rigidbody.transform.position, this.target.rigidbody.transform.position, Time.deltaTime * this.runSpeed );
-			this.wolf.rigidbody.transform.LookAt( this.target.transform.position );
+			this.wolf.rigidbody.transform.position = Vector3.Lerp (this.wolf.rigidbody.transform.position, this.target.rigidbody.transform.position, Time.deltaTime * this.runSpeed);
+			this.wolf.rigidbody.transform.LookAt (this.target.transform.position);
 			break;
 		case WolfState.Eating:
 			//If Wolf is done eating set it to Leash
-			if (eatingTimer >= eatTime){
+			if (eatingTimer >= eatTime) {
 				this.target = null;
 				this.state = WolfState.Leashing;
 				this.eatingTimer = 0.0f;
 				break;
 			}
-			this.eatingTimer+=Time.deltaTime;
+			this.eatingTimer += Time.deltaTime;
 			break;
 		case WolfState.Leashing:
 			//If the distance from wolfObject to Center is <0.1 set wolf state to idle
 			//Else move wolfObject closer to center.
-			if( (this.wolf.transform.position - this.transform.position).magnitude > 0.1f){
-				this.wolf.rigidbody.transform.position = Vector3.Lerp( this.wolf.rigidbody.transform.position, this.transform.position, Time.deltaTime * this.runSpeed );
-				this.wolf.rigidbody.transform.LookAt( this.transform.position );
-			}
-			else{
+			if ((this.wolf.transform.position - this.transform.position).magnitude > 0.1f) {
+				this.wolf.rigidbody.transform.position = Vector3.Lerp (this.wolf.rigidbody.transform.position, this.transform.position, Time.deltaTime * this.runSpeed);
+				this.wolf.rigidbody.transform.LookAt (this.transform.position);
+			} else {
 				this.state = WolfState.Idle;
 			}
 			break;
@@ -87,51 +102,57 @@ public class WolfBehavior : MonoBehaviour {
 	
 	}
 	
-	public void AddTarget( GameObject t){
+	public void AddTarget (GameObject t)
+	{
 		//Add t to the list after determining the type of game object it is.
-		if(GetType(t) != TargetType.Inedible){
-			this.possibleTargets[(int)GetType(t)].Add(t);
+		if (GetType (t) != TargetType.Inedible) {
+			this.possibleTargets [(int)GetType (t)].Add (t);
 			this.targetCount++;
 		}
 	}
 	
-	public void RemoveTarget( GameObject t){
-		this.possibleTargets[(int)GetType(t)].Remove(t);
+	public void RemoveTarget (GameObject t)
+	{
+		this.possibleTargets [(int)GetType (t)].Remove (t);
 		this.targetCount--;
 	}
 	
 	//Gets the type of the Objects based off its Tag
-	TargetType GetType( GameObject t){
-		if( t.tag == "Pig" || t.tag == "Sheep"){
-			if( t.GetComponent<SheepMovement>().target){
-				if(t.tag == "Pig"){
+	TargetType GetType (GameObject t)
+	{
+		if (t.tag == "Pig" || t.tag == "Sheep") {
+			if (t.GetComponent<SheepMovement> ().target) {
+				if (t.tag == "Pig") {
 					return TargetType.LoosePig;
-				}
-				else if(t.tag == "Sheep"){
+				} else if (t.tag == "Sheep") {
 					return TargetType.LooseSheep;
+				} else {
+					return TargetType.Inedible;
 				}
-			}
-			else{
-				if(t.tag == "Pig"){
+			} else {
+				if (t.tag == "Pig") {
 					return TargetType.Pig;
-				}
-				else if(t.tag == "Sheep"){
+				} else if (t.tag == "Sheep") {
 					return TargetType.Sheep;
+				} else {
+					return TargetType.Inedible;
 				}
 			}
+		} else {
+			return TargetType.Inedible;
 		}
-		return TargetType.Inedible;
 	}
 	//Function to return the priority target
-	GameObject FindTarget(){
-		foreach (List<GameObject> targetList in this.possibleTargets){
-			if (targetList.Count >0){
-				GameObject priority = targetList[0];
-				float range = Range(this.wolf, targetList[0]);
-				foreach (GameObject t in targetList){
-					if(range < Range(this.wolf, t)){
+	GameObject FindTarget ()
+	{
+		foreach (List<GameObject> targetList in this.possibleTargets) {
+			if (targetList.Count > 0) {
+				GameObject priority = targetList [0];
+				float range = Range (this.wolf, targetList [0]);
+				foreach (GameObject t in targetList) {
+					if (range < Range (this.wolf, t)) {
 						priority = t;
-						range = Range(this.wolf, t);
+						range = Range (this.wolf, t);
 					}
 				}
 				return priority;
@@ -140,7 +161,8 @@ public class WolfBehavior : MonoBehaviour {
 		return null;
 	}
 	//Function returns the distance between source s and target t
-	float Range(GameObject s, GameObject t){
+	float Range (GameObject s, GameObject t)
+	{
 		return (t.transform.position - s.transform.position).magnitude;
 	}
 }
