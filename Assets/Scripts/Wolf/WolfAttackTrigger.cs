@@ -12,4 +12,10 @@ public class WolfAttackTrigger : MonoBehaviour {
 	void Update () {
 	
 	}
+	
+	void OnTriggerEnter(Collider other){
+		if(other.tag == "Sheep" || other.tag == "Pig"){
+			this.collider.transform.root.gameObject.GetComponent<WolfBehavior>().AddTarget(other)
+		}
+	}
 }
