@@ -1,0 +1,163 @@
+fileFormatVersion: 2
+guid: 1f082120d20d4425990b730b6f51b305
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: ikHandle1
+    100002: ikHandle2
+    100004: ikHandle3
+    100006: joint1
+    100008: joint2
+    100010: joint3
+    100012: joint4
+    100014: joint5
+    100016: joint6
+    100018: joint7
+    100020: joint8
+    100022: joint9
+    100024: l_b_ctrl
+    100026: l_b_hoof_jnt
+    100028: l_b_knee_jnt
+    100030: l_b_leg
+    100032: l_b_shoulder_jnt1
+    100034: l_f_hoof_jnt
+    100036: l_f_ikHandle1
+    100038: l_f_knee_jnt
+    100040: l_f_leg
+    100042: l_f_leg 1
+    100044: l_f_shoulder_jnt
+    100046: l_foot_ctrl
+    100048: r_b_ctrl
+    100050: r_b_hoof_jnt
+    100052: r_b_knee_jnt
+    100054: r_b_leg
+    100056: r_b_shoulder_jnt2
+    100058: r_f_hoof_jnt
+    100060: r_f_knee_jnt
+    100062: r_f_leg
+    100064: r_f_shoulder_jnt1
+    100066: r_foot_ctrl1
+    100068: sheep
+    100070: sheep_eyes
+    100072: //RootNode
+    100074: sheephat
+    400000: ikHandle1
+    400002: ikHandle2
+    400004: ikHandle3
+    400006: joint1
+    400008: joint2
+    400010: joint3
+    400012: joint4
+    400014: joint5
+    400016: joint6
+    400018: joint7
+    400020: joint8
+    400022: joint9
+    400024: l_b_ctrl
+    400026: l_b_hoof_jnt
+    400028: l_b_knee_jnt
+    400030: l_b_leg
+    400032: l_b_shoulder_jnt1
+    400034: l_f_hoof_jnt
+    400036: l_f_ikHandle1
+    400038: l_f_knee_jnt
+    400040: l_f_leg
+    400042: l_f_leg 1
+    400044: l_f_shoulder_jnt
+    400046: l_foot_ctrl
+    400048: r_b_ctrl
+    400050: r_b_hoof_jnt
+    400052: r_b_knee_jnt
+    400054: r_b_leg
+    400056: r_b_shoulder_jnt2
+    400058: r_f_hoof_jnt
+    400060: r_f_knee_jnt
+    400062: r_f_leg
+    400064: r_f_shoulder_jnt1
+    400066: r_foot_ctrl1
+    400068: sheep
+    400070: sheep_eyes
+    400072: //RootNode
+    400074: sheephat
+    4300000: sheep
+    4300002: sheephat
+    4300004: sheep_eyes
+    7400000: sheep_idle
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: sheep
+    13700002: sheep_eyes
+    13700004: sheephat
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations:
+    - name: sheep_idle
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 49
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 1
+  userData: 

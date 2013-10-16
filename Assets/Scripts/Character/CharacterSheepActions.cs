@@ -10,6 +10,8 @@ public class CharacterSheepActions : MonoBehaviour
 	public GameObject 	bigSheep;
 	public GameObject 	back;
 	public GameObject 	top;
+	public GameObject	mesh;
+	public Transform	handJoint;
 	
 	[HideInInspector]
 	public List<GameObject> sheepList;
@@ -20,6 +22,8 @@ public class CharacterSheepActions : MonoBehaviour
 	void Start ()
 	{
 		sheepList = new List<GameObject>();
+		this.mesh.animation["farmer_interaction"].layer = 1;
+		this.mesh.animation["farmer_throw"].layer = 1;
 		this.lastBack = this.back;
 	}
 	
@@ -36,10 +40,11 @@ public class CharacterSheepActions : MonoBehaviour
 			Ray target = Camera.main.ScreenPointToRay (Input.mousePosition);
 			RaycastHit hit = new RaycastHit();
 			if (Physics.Raycast (target, out hit)){
-				this.ThrowSheep(hit.point);			
+				this.ThrowSheep(hit.point);
 			}
 		}
 		if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Joystick1Button18)){
+			this.mesh.animation.CrossFade("farmer_throw");
 			this.ThrowSheep();
 		}
 		if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.Joystick1Button14)){
@@ -160,10 +165,21 @@ public class CharacterSheepActions : MonoBehaviour
 												  deltaZ);
 				this.sheepList[0].GetComponent<SheepMovement>().Throw (throwVector.normalized * this.throwForce);
 			}
+			
 			this.sheepList.RemoveAt(0);
 			if(this.sheepList.Count > 0){
-				this.sheepList[0].GetComponent<SheepMovement>().Follow (this.gameObject);
+				this.sheepList[0].GetComponent<SheepMovement>().Follow (this.back);
+			}else{
+				this.lastBack = this.back;
 			}
+			/*
+			if (this.sheepList.Count > 1){
+				this.sheepList[1].GetComponent<SheepMovement>().target = this.back;
+			}
+			else{
+				this.lastBack = this.back;
+			}
+			*/
 		}
 	}
 	
