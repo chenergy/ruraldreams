@@ -108,6 +108,7 @@ public class CharacterMovement : MonoBehaviour
 	private bool 				jumping 		= false;
 	//private CharacterController controller;
 	private CapsuleCollider		controller;
+	private Quaternion			targetRotation;
 	// Use this for initialization
 	void Start ()
 	{
@@ -155,9 +156,11 @@ public class CharacterMovement : MonoBehaviour
 		}
 		
 		// Spherically interporlate towards a target rotation
+		
 		Vector3 lookDirection = new Vector3( Input.GetAxis("HorizontalKey") + Input.GetAxis("HorizontalJoystick") * 0.5f,
 			0.0f, 
 			Input.GetAxis("VerticalKey") + Input.GetAxis("VerticalJoystick") * 0.5f);
+		
 		this.rotation = Quaternion.Slerp( this.transform.rotation, Quaternion.LookRotation(lookDirection), Time.deltaTime * 10.0f);
 		/*
 		if (Input.GetAxis("HorizontalKey") 		!= 0.0f ||
