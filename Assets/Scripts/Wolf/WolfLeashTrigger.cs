@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class WolfAttackTrigger : MonoBehaviour {
+public class WolfLeashTrigger : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -13,9 +13,9 @@ public class WolfAttackTrigger : MonoBehaviour {
 	
 	}
 	
-	void OnTriggerEnter(Collider other){
+	void OnTriggerExit(Collider other){
 		if(other.tag == "Sheep" || other.tag == "Pig"){
-			this.collider.transform.root.gameObject.GetComponent<WolfBehavior>().AddTarget(other.gameObject);
+			this.collider.transform.root.gameObject.GetComponent<WolfBehavior>().RemoveTarget(other.gameObject);
 		}
 	}
 }

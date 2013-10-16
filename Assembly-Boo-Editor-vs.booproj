@@ -50,6 +50,18 @@
  <Reference Include="Assembly-UnityScript-firstpass">
  <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
+ <Reference Include="RAINIndie">
+ <HintPath>Assets\RAIN\RAINIndie.dll</HintPath>
+ </Reference>
+ <Reference Include="Recast">
+ <HintPath>Assets\RAIN\Recast.dll</HintPath>
+ </Reference>
+ <Reference Include="RAINEditor">
+ <HintPath>Assets\RAIN\Editor\RAINEditor.dll</HintPath>
+ </Reference>
+ <Reference Include="RecastEditor">
+ <HintPath>Assets\RAIN\Editor\RecastEditor.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>F:\Apps\Unity\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
  </Reference>
@@ -67,18 +79,6 @@
  </Reference>
  <Reference Include="UnityEditor.Android.Extensions">
  <HintPath>F:\Apps\Unity\Editor\Data\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions.dll</HintPath>
- </Reference>
- <Reference Include="RAINIndie">
- <HintPath>Assets\RAIN\RAINIndie.dll</HintPath>
- </Reference>
- <Reference Include="RAINEditor">
- <HintPath>Assets\RAIN\Editor\RAINEditor.dll</HintPath>
- </Reference>
- <Reference Include="Recast">
- <HintPath>Assets\RAIN\Recast.dll</HintPath>
- </Reference>
- <Reference Include="RecastEditor">
- <HintPath>Assets\RAIN\Editor\RecastEditor.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
