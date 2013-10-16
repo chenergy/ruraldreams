@@ -36,7 +36,7 @@ public class OverheadDisplay : MonoBehaviour
 	}
 	
 	void OnGUI(){
-		GUI.Box(new Rect(Screen.width/2.0f - 200, Screen.height - 300, 400, 200), this.finalText, style);
+		GUI.Box(new Rect(Screen.width/2.0f - 200, Screen.height/2.0f - 200, 400, 200), this.finalText, style);
 	}
 }
 
