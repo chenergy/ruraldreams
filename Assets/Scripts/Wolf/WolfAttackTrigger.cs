@@ -15,7 +15,7 @@ public class WolfAttackTrigger : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other){
 		if(other.tag == "Sheep" || other.tag == "Pig"){
-			this.collider.transform.root.gameObject.GetComponent<WolfBehavior>().AddTarget(other)
+			this.collider.transform.root.gameObject.GetComponent<WolfBehavior>().AddTarget(other.gameObject);
 		}
 	}
 }

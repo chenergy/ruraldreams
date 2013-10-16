@@ -22,17 +22,22 @@ public class WolfBehavior : MonoBehaviour {
 	
 	//Internal attributes of the wolf.
 	private WolfState state = WolfState.Idle;
-	private List<GameObject> loosePigs = new List<GameObject>();
-	private List<GameObject> looseSheep = List<GameObject>();
-	private List<GameObject> pigs = new List<GameObject>();
-	private List<GameObject> sheep = new List<GameObject>();
-	private List<GameObject>[] possibleTargets = new List<GameObject>[4]{loosePigs, looseSheep, pigs, sheep};
+	private List<GameObject> loosePigs;
+	private List<GameObject> looseSheep;
+	private List<GameObject> pigs;
+	private List<GameObject> sheep;
+	private List<GameObject>[] possibleTargets;
 	private float eatingTimer = 0.0f;
        private int targetCount = 0;
 		
 
 	// Use this for initialization
 	void Start () {
+		this.loosePigs = new List<GameObject>();
+		this.looseSheep = new List<GameObject>();
+		this.pigs = new List<GameObject>();
+		this.sheep = new List<GameObject>();
+		this.possibleTargets = new List<GameObject>[4]{ loosePigs, looseSheep, pigs, sheep };
 		this.agroTrigger.GetComponent<SphereCollider>().radius = agroRange;
 		this.leashTrigger.GetComponent<SphereCollider>().radius = leashRange;
 	}
@@ -85,7 +90,7 @@ public class WolfBehavior : MonoBehaviour {
 	public void AddTarget( GameObject t){
 		//Add t to the list after determining the type of game object it is.
 		if(GetType(t) != TargetType.Inedible){
-			this.possibleTargets[(int)GetType(t)].Add(GetType(t), t);
+			this.possibleTargets[(int)GetType(t)].Add(t);
 			this.targetCount++;
 		}
 	}
@@ -115,9 +120,7 @@ public class WolfBehavior : MonoBehaviour {
 				}
 			}
 		}
-		else{
-			return TargetType.Inedible;
-		}
+		return TargetType.Inedible;
 	}
 	//Function to return the priority target
 	GameObject FindTarget(){
@@ -126,7 +129,7 @@ public class WolfBehavior : MonoBehaviour {
 				GameObject priority = targetList[0];
 				float range = Range(this.wolf, targetList[0]);
 				foreach (GameObject t in targetList){
-					if(range < Range(this.wolf, t){
+					if(range < Range(this.wolf, t)){
 						priority = t;
 						range = Range(this.wolf, t);
 					}
@@ -134,10 +137,11 @@ public class WolfBehavior : MonoBehaviour {
 				return priority;
 			}
 		}
+		return null;
 	}
 	//Function returns the distance between source s and target t
 	float Range(GameObject s, GameObject t){
-		return (t.transform.position – s.transform.position).magnitude;
+		return (t.transform.position - s.transform.position).magnitude;
 	}
 }
 
