@@ -84,7 +84,9 @@ ModelImporter:
     400076: transform8
     400078: transform9
     2300000: polySurface13
+    2300002: //RootNode
     3300000: polySurface13
+    3300002: //RootNode
     4300000: polySurface13
     9500000: //RootNode
   materials:

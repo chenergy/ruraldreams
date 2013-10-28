@@ -103,6 +103,8 @@ public class CharacterMovement : MonoBehaviour
 	public float 				moveSpeed 		= 1.0f;
 	public float 				jumpStrength 	= 10.0f;
 	
+	//public AudioClip			walking;
+	
 	private Vector3 			movement;
 	private Quaternion 			rotation;
 	private bool 				jumping 		= false;
@@ -125,6 +127,8 @@ public class CharacterMovement : MonoBehaviour
 			(Mathf.Abs(Input.GetAxis("VerticalKey")) > 0) || 
 			(Mathf.Abs(Input.GetAxis("VerticalJoystick")) > 0)){
 			
+			this.GetComponent<AudioSource>().Play();
+			
 			if ( Input.GetAxis("VerticalKey") > 0 || Input.GetAxis("VerticalJoystick") > 0){
 				this.controller.transform.position += new Vector3(0.0f, 0.0f, (Input.GetAxis("VerticalKey") + Input.GetAxis("VerticalJoystick")) * 0.5f * Time.deltaTime * this.moveSpeed);
 			}
@@ -145,6 +149,7 @@ public class CharacterMovement : MonoBehaviour
 			this.collider.transform.rotation = this.rotation;
 		}
 		else{
+			this.GetComponent<AudioSource>().Stop();
 			this.mesh.animation.CrossFade("farmer_idle");
 		}
 		

@@ -17,6 +17,8 @@ public class SheepMovement : MonoBehaviour
 	public GameObject 	back;
 	public GameObject	deathParts;
 	
+	public AudioClip	sound;
+	
 	[HideInInspector]
 	public SheepState state = SheepState.IDLE;
 	
@@ -35,29 +37,30 @@ public class SheepMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		/*
 		foreach (GameObject sheep in GameObject.FindGameObjectsWithTag("Sheep")){
 			Collider other = sheep.collider;
 			if (other.tag != this.tag)
 				Physics.IgnoreCollision(this.collider, other.collider);
 		}
-		
+		*/
 		switch (this.state){
 		case SheepState.IDLE:
-			this.mesh.animation.CrossFade("sheep_idle");
+			this.mesh.animation.CrossFade("idle");
 			this.rigidbody.useGravity 		= true;
 			this.rigidbody.freezeRotation 	= true;
 			this.collider.enabled 			= true;
 			this.radius.collider.enabled	= true;
 			break;
 		case SheepState.FOLLOWING:
-			this.mesh.animation.CrossFade("sheep_walk");
+			this.mesh.animation.CrossFade("walk");
 			this.rigidbody.useGravity 		= true;
 			this.rigidbody.freezeRotation 	= false;
 			this.collider.enabled 			= true;
 			this.radius.collider.enabled	= false;
 			if (this.target != null){
-				if ((this.target.transform.position - this.collider.transform.position).magnitude > 0.5f){
-					this.collider.transform.position = Vector3.Lerp( this.collider.transform.position, new Vector3(this.target.transform.position.x, 0.5f, this.target.transform.position.z), Time.deltaTime * this.followSpeed );
+				if ((this.target.transform.position - this.collider.transform.position).magnitude > 0.75f){
+					this.collider.transform.position = Vector3.Lerp( this.collider.transform.position, this.target.transform.position, Time.deltaTime * this.followSpeed );
 					this.collider.transform.LookAt( new Vector3(this.target.transform.position.x, 0.5f, this.target.transform.position.z) );
 				}
 			}
@@ -66,7 +69,7 @@ public class SheepMovement : MonoBehaviour
 			//this.collider.transform.position = new Vector3(this.collider.transform.position.x, yPosition, this.collider.transform.position.z);
 			break;
 		case SheepState.THROWN:
-			this.mesh.animation.Play("sheep_throwspin");
+			this.mesh.animation.Play("throw");
 			this.rigidbody.useGravity 		= true;
 			this.rigidbody.freezeRotation 	= false;
 			this.collider.enabled 			= true;
@@ -114,6 +117,7 @@ public class SheepMovement : MonoBehaviour
 	}
 	
 	public void Throw(Vector3 point){
+		AudioSource.PlayClipAtPoint(this.sound, this.transform.position, 10.0f);
 		//this.transform.position = this.target.transform.position + new Vector3(0, this.throwStartHeight, 0);
 		this.transform.position = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterSheepActions>().top.transform.position;
 		this.rigidbody.velocity = point;

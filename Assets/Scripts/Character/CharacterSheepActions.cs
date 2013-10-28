@@ -109,6 +109,7 @@ public class CharacterSheepActions : MonoBehaviour
 	}
 	
 	public void PickupSheep( GameObject sheep ){
+		this.ResetSheepTargets();
 		SheepMovement script = sheep.GetComponent<SheepMovement>();
 		script.target = this.lastBack;
 		script.state = SheepState.FOLLOWING;
@@ -142,6 +143,7 @@ public class CharacterSheepActions : MonoBehaviour
 	}
 	
 	public void ThrowSheep (Vector3 point){
+		this.mesh.animation.CrossFade("farmer_throw");
 		if (this.sheepList.Count > 0){
 			//Sets the change in X, Y, Z and Magnitute of vector from source to target
 			float deltaX = point.x-this.transform.position.x;
@@ -220,18 +222,33 @@ public class CharacterSheepActions : MonoBehaviour
 	}
 	
 	private void DestroyAllSheep(){
-		if (this.sheepDestructionTimer > 1.0f){
-			this.sheepDestructionTimer = 0.0f;
+		//if (this.sheepDestructionTimer > 1.0f){
+			//this.sheepDestructionTimer = 0.0f;
 			foreach (GameObject sheep in GameObject.FindGameObjectsWithTag("Sheep")){
 				SheepMovement movement = sheep.GetComponent<SheepMovement>();
 				GameObject sheepParts = GameObject.Instantiate(movement.deathParts, sheep.transform.position, Quaternion.identity) as GameObject;
 				GameObject.Destroy(sheepParts, 2.0f);
 				GameObject.Destroy(sheep);
 			}
+		//}
+		//else{
+			//this.sheepDestructionTimer += Time.deltaTime;
+		//}
+	}
+	
+	public void ResetSheepTargets(){
+		Debug.Log("Resetting Sheep");
+		this.lastBack = this.back;
+		List<GameObject> newSheepList = new List<GameObject>();
+		for( int i = 0; i < this.sheepList.Count; i++){
+			if (this.sheepList[i] != null){
+				newSheepList.Add(this.sheepList[i]);
+				SheepMovement script = this.sheepList[i].GetComponent<SheepMovement>();
+				script.target = this.lastBack;
+				this.lastBack = script.back;
+			}
 		}
-		else{
-			this.sheepDestructionTimer += Time.deltaTime;
-		}
+		this.sheepList = newSheepList;
 	}
 }
 

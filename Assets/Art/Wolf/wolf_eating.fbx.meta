@@ -1,0 +1,165 @@
+fileFormatVersion: 2
+guid: 889a738ee663a8b46bf7347b24bd1342
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: b_head_jnt
+    100002: curve1
+    100004: head_jnt
+    100006: hip_jnt
+    100008: jaw_jnt
+    100010: l_bankle_jnt
+    100012: l_bclaw_jnt
+    100014: l_bknee_jnt
+    100016: l_bpaw_jnt
+    100018: l_bshoulder_jnt3
+    100020: l_fankle_jnt
+    100022: l_fclaw_jnt
+    100024: l_fknee_jnt
+    100026: l_fpaw_jnt
+    100028: l_fshoulder_jnt
+    100030: neck_jnt
+    100032: nose_jnt
+    100034: r_bankle_jnt
+    100036: r_bclaw_jnt
+    100038: r_bknee_jnt
+    100040: r_bpaw_jnt
+    100042: r_bshoulder_jnt2
+    100044: r_fankle_jnt
+    100046: r_fclaw_jnt
+    100048: r_fknee_jnt
+    100050: r_fpaw_jnt
+    100052: r_fshoulder_jnt1
+    100054: root_jnt
+    100056: scapula_jnt
+    100058: spine1_jnt
+    100060: spine_jnt
+    100062: tail1_jnt
+    100064: tail2_jnt
+    100066: tail3_jnt
+    100068: tail4_jnt
+    100070: tail5__jnt
+    100072: tail6_jnt
+    100074: tail_jnt
+    100076: wolf
+    100078: wolf_ctrl
+    100080: //RootNode
+    400000: b_head_jnt
+    400002: curve1
+    400004: head_jnt
+    400006: hip_jnt
+    400008: jaw_jnt
+    400010: l_bankle_jnt
+    400012: l_bclaw_jnt
+    400014: l_bknee_jnt
+    400016: l_bpaw_jnt
+    400018: l_bshoulder_jnt3
+    400020: l_fankle_jnt
+    400022: l_fclaw_jnt
+    400024: l_fknee_jnt
+    400026: l_fpaw_jnt
+    400028: l_fshoulder_jnt
+    400030: neck_jnt
+    400032: nose_jnt
+    400034: r_bankle_jnt
+    400036: r_bclaw_jnt
+    400038: r_bknee_jnt
+    400040: r_bpaw_jnt
+    400042: r_bshoulder_jnt2
+    400044: r_fankle_jnt
+    400046: r_fclaw_jnt
+    400048: r_fknee_jnt
+    400050: r_fpaw_jnt
+    400052: r_fshoulder_jnt1
+    400054: root_jnt
+    400056: scapula_jnt
+    400058: spine1_jnt
+    400060: spine_jnt
+    400062: tail1_jnt
+    400064: tail2_jnt
+    400066: tail3_jnt
+    400068: tail4_jnt
+    400070: tail5__jnt
+    400072: tail6_jnt
+    400074: tail_jnt
+    400076: wolf
+    400078: wolf_ctrl
+    400080: //RootNode
+    4300000: wolf
+    7400000: eating
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: wolf
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations:
+    - name: eating
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 57
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 1
+  userData: 

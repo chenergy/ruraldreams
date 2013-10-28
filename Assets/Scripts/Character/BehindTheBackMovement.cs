@@ -10,6 +10,9 @@ public class BehindTheBackMovement : MonoBehaviour
 	public float 				moveSpeed 		= 1.0f;
 	public float 				jumpStrength 	= 10.0f;
 	
+	public AudioClip			walkingSound;
+	public AudioClip			jumpingSound;
+	
 	private Vector3 			movement;
 	private Quaternion 			rotation;
 	private bool 				jumping 		= false;
@@ -57,6 +60,8 @@ public class BehindTheBackMovement : MonoBehaviour
 			//this.collider.transform.rotation = this.rotation;
 		}
 		else{
+			this.GetComponent<AudioSource>().clip = null;
+			this.GetComponent<AudioSource>().enabled = false;
 			this.mesh.animation.CrossFade("farmer_idle");
 		}
 		
@@ -65,6 +70,11 @@ public class BehindTheBackMovement : MonoBehaviour
 			if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button16)){
 				this.Jump();
 			}
+			this.GetComponent<AudioSource>().clip = this.walkingSound;
+			this.GetComponent<AudioSource>().enabled = true;
+		}
+		else{
+			this.GetComponent<AudioSource>().enabled = false;
 		}
 		
 		// Spherically interporlate towards a target rotation
@@ -104,7 +114,7 @@ public class BehindTheBackMovement : MonoBehaviour
 			this.jumping = true; 
 		}
 		
-		Debug.Log("Grounded? " + this.IsGrounded.ToString() );
+		//Debug.Log("Grounded? " + this.IsGrounded.ToString() );
 		Debug.DrawRay(new Vector3(this.controller.transform.position.x, 
 				this.controller.transform.position.y - this.controller.height * 0.5f,
 				this.controller.transform.position.z), Vector3.down * 0.2f);
@@ -126,6 +136,7 @@ public class BehindTheBackMovement : MonoBehaviour
 	}
 	
 	private void Jump(){
+		AudioSource.PlayClipAtPoint(this.jumpingSound, Camera.main.transform.position, 0.5f);
 		this.jumping = true;
 		/*
 		this.movement.y += this.jumpStrength;

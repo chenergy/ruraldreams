@@ -1,0 +1,184 @@
+fileFormatVersion: 2
+guid: 08209a6a1e23743219f95b62cee07b55
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: ears
+    100002: face_jnt
+    100004: head_jnt
+    100006: head_jnt 1
+    100008: hip_jnt
+    100010: ikHandle1
+    100012: ikHandle2
+    100014: ikHandle3
+    100016: ikHandle4
+    100018: ikHandle5
+    100020: ikHandle6
+    100022: ikHandle7
+    100024: l_b_hoof_ctrl
+    100026: l_ear_1_jnt
+    100028: l_ear_2_jnt
+    100030: l_ear_ctrl1
+    100032: l_ear_jnt
+    100034: l_f_hoof_ctrl
+    100036: l_f_hoof_jnt
+    100038: l_f_knee_jnt
+    100040: l_f_leg
+    100042: l_f_shoulder_jnt
+    100044: nose_grp
+    100046: nose_jnt
+    100048: nose_wiggler
+    100050: pig
+    100052: pig_ctrls
+    100054: //RootNode
+    100056: pig_world_ctrl
+    100058: r_b_hoof_ctrl
+    100060: r_ear_1_jnt
+    100062: r_ear_2_jnt
+    100064: r_ear_ctrl
+    100066: r_ear_jnt
+    100068: r_f_hoof_ctrl1
+    100070: r_f_hoof_jnt
+    100072: r_f_hoof_jnt 1
+    100074: r_f_hoof_jnt 2
+    100076: r_f_knee_jnt
+    100078: r_f_knee_jnt 1
+    100080: r_f_knee_jnt 2
+    100082: r_f_leg
+    100084: r_f_shoulder_jnt1
+    100086: r_f_shoulder_jnt2
+    100088: r_f_shoulder_jnt3
+    100090: root_jnt
+    100092: sheephat1
+    100094: shoulder_jnt
+    100096: spine_jnt
+    400000: ears
+    400002: face_jnt
+    400004: head_jnt
+    400006: head_jnt 1
+    400008: hip_jnt
+    400010: ikHandle1
+    400012: ikHandle2
+    400014: ikHandle3
+    400016: ikHandle4
+    400018: ikHandle5
+    400020: ikHandle6
+    400022: ikHandle7
+    400024: l_b_hoof_ctrl
+    400026: l_ear_1_jnt
+    400028: l_ear_2_jnt
+    400030: l_ear_ctrl1
+    400032: l_ear_jnt
+    400034: l_f_hoof_ctrl
+    400036: l_f_hoof_jnt
+    400038: l_f_knee_jnt
+    400040: l_f_leg
+    400042: l_f_shoulder_jnt
+    400044: nose_grp
+    400046: nose_jnt
+    400048: nose_wiggler
+    400050: pig
+    400052: pig_ctrls
+    400054: //RootNode
+    400056: pig_world_ctrl
+    400058: r_b_hoof_ctrl
+    400060: r_ear_1_jnt
+    400062: r_ear_2_jnt
+    400064: r_ear_ctrl
+    400066: r_ear_jnt
+    400068: r_f_hoof_ctrl1
+    400070: r_f_hoof_jnt
+    400072: r_f_hoof_jnt 1
+    400074: r_f_hoof_jnt 2
+    400076: r_f_knee_jnt
+    400078: r_f_knee_jnt 1
+    400080: r_f_knee_jnt 2
+    400082: r_f_leg
+    400084: r_f_shoulder_jnt1
+    400086: r_f_shoulder_jnt2
+    400088: r_f_shoulder_jnt3
+    400090: root_jnt
+    400092: sheephat1
+    400094: shoulder_jnt
+    400096: spine_jnt
+    2300000: sheephat1
+    3300000: sheephat1
+    4300000: pig
+    4300002: sheephat1
+    7400000: throw
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: pig
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations:
+    - name: throw
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 25
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 1
+  userData: 

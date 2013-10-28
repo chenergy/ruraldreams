@@ -34,6 +34,7 @@ public class WolfBehavior : MonoBehaviour
 	public float runSpeed = 5.0f;
 	public float eatTime = 2.0f;
 	public GameObject target;
+	public AudioClip growl;
 	
 	//Internal attributes of the wolf.
 	private WolfState state = WolfState.Idle;
@@ -63,7 +64,14 @@ public class WolfBehavior : MonoBehaviour
 		//Picks a target off the front of the target list and chases it.
 		if (this.targetCount > 0 && this.state != WolfState.Eating) {
 			this.target = FindTarget ();
-			this.state = WolfState.Chasing;
+			if (this.target != null){
+				if (this.state != WolfState.Chasing){
+					AudioSource.PlayClipAtPoint(this.growl, Camera.main.transform.position, 0.1f);
+					this.state = WolfState.Chasing;
+				}else{
+					this.state = WolfState.Chasing;
+				}
+			}
 		}
 		if (this.targetCount <= 0) {
 			this.target = null;
@@ -71,19 +79,35 @@ public class WolfBehavior : MonoBehaviour
 		}
 		switch (state) {
 		case WolfState.Idle:
+			this.wolf.animation.CrossFade("idle");
 			this.wolf.rigidbody.transform.position = this.transform.position;
 			this.wolf.rigidbody.transform.LookAt (Camera.main.transform.position);
 			break;
 		case WolfState.Chasing:
-			this.wolf.rigidbody.transform.position = Vector3.Lerp (this.wolf.rigidbody.transform.position, this.target.rigidbody.transform.position, Time.deltaTime * this.runSpeed);
-			this.wolf.rigidbody.transform.LookAt (this.target.transform.position);
+			this.wolf.animation.CrossFade("run");
+			if (this.target != null){
+				this.wolf.rigidbody.transform.position = Vector3.Lerp (this.wolf.rigidbody.transform.position, new Vector3(this.target.transform.position.x, this.wolf.rigidbody.transform.position.y, this.target.transform.position.z), Time.deltaTime * this.runSpeed);
+				this.wolf.rigidbody.transform.LookAt (new Vector3(this.target.transform.position.x, this.wolf.rigidbody.transform.position.y, this.target.transform.position.z));
+				Debug.Log((this.wolf.transform.position - this.target.transform.position).magnitude);
+				if ( (this.wolf.transform.position - this.target.transform.position).magnitude < 2.0f){
+					this.state = WolfState.Eating;
+				}
+			}
 			break;
 		case WolfState.Eating:
+			this.wolf.animation.CrossFade("eating");
 			//If Wolf is done eating set it to Leash
 			if (eatingTimer >= eatTime) {
-				this.target = null;
-				this.state = WolfState.Leashing;
-				this.eatingTimer = 0.0f;
+				if (this.target != null){
+					GameObject newDeathParts = GameObject.Instantiate(this.target.GetComponent<SheepMovement>().deathParts, this.target.transform.position, Quaternion.identity) as GameObject;
+					GameObject.Destroy(newDeathParts, 1.0f);
+					GameObject.Destroy(this.target);
+					GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterSheepActions>().ResetSheepTargets();
+					this.RemoveTarget(this.target);
+					this.target = null;
+					this.state = WolfState.Leashing;
+					this.eatingTimer = 0.0f;
+				}
 				break;
 			}
 			this.eatingTimer += Time.deltaTime;
@@ -92,8 +116,8 @@ public class WolfBehavior : MonoBehaviour
 			//If the distance from wolfObject to Center is <0.1 set wolf state to idle
 			//Else move wolfObject closer to center.
 			if ((this.wolf.transform.position - this.transform.position).magnitude > 0.1f) {
-				this.wolf.rigidbody.transform.position = Vector3.Lerp (this.wolf.rigidbody.transform.position, this.transform.position, Time.deltaTime * this.runSpeed);
-				this.wolf.rigidbody.transform.LookAt (this.transform.position);
+				this.wolf.rigidbody.transform.position = Vector3.Lerp (this.wolf.rigidbody.transform.position, new Vector3(this.transform.position.x, this.wolf.rigidbody.transform.position.y, this.transform.position.z), Time.deltaTime * this.runSpeed);
+				this.wolf.rigidbody.transform.LookAt (new Vector3(this.transform.position.x, this.wolf.rigidbody.transform.position.y, this.transform.position.z));
 			} else {
 				this.state = WolfState.Idle;
 			}
@@ -163,7 +187,9 @@ public class WolfBehavior : MonoBehaviour
 	//Function returns the distance between source s and target t
 	float Range (GameObject s, GameObject t)
 	{
-		return (t.transform.position - s.transform.position).magnitude;
+		if (s != null && t != null)
+			return (t.transform.position - s.transform.position).magnitude;
+		return 1000f;
 	}
 }
 
