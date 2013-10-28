@@ -38,8 +38,8 @@ public class TextDisplay : MonoBehaviour
 	
 	void OnGUI(){
 		if (this.finalText.Length > 0){
-			GUI.Label(new Rect(Screen.width/2.0f - 300, Screen.height - 100, 600, 90), " ");
-			GUI.TextField(new Rect(Screen.width/2.0f - 300, Screen.height - 100, 600, 90), this.finalText/*, this.style*/);
+			GUI.Label(new Rect(Screen.width/2.0f - 300, Screen.height - 130, 600, 110), " ");
+			GUI.TextField(new Rect(Screen.width/2.0f - 300, Screen.height - 130, 600, 110), this.finalText/*, this.style*/);
 		}
 	}
 }

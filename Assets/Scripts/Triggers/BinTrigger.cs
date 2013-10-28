@@ -3,6 +3,7 @@ using System.Collections;
 
 public class BinTrigger : MonoBehaviour
 {
+	public Material triggeredMaterial;
 	private int sheepCount;
 	public int threshold = 1;
 	private bool triggered = false;
@@ -32,6 +33,8 @@ public class BinTrigger : MonoBehaviour
 				Destroy (other.gameObject);
 			}
 		} else if (other.gameObject.tag == "Sheep") {
+			this.transform.parent.gameObject.renderer.material = this.triggeredMaterial;
+			Debug.Log(this.transform.parent.gameObject.GetComponent<MeshRenderer>().material.ToString());
 			sheepCount++;
 		}
 	}

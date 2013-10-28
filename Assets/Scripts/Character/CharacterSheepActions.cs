@@ -43,10 +43,10 @@ public class CharacterSheepActions : MonoBehaviour
 				this.ThrowSheep(hit.point);
 			}
 		}
-		if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Joystick1Button18)){
+		/*if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Joystick1Button18)){
 			this.mesh.animation.CrossFade("farmer_throw");
 			this.ThrowSheep();
-		}
+		}*/
 		if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.Joystick1Button14)){
 			this.CycleSheepBack();
 		}
